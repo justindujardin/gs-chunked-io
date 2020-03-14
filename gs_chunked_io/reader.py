@@ -44,7 +44,7 @@ class Reader(io.IOBase):
 
         ret_data = self._buffer[:size]
         del self._buffer[:size]
-        return ret_data
+        return bytes(ret_data)
 
     def readinto(self, buff) -> int:
         d = self.read(len(buff))
@@ -99,7 +99,7 @@ class AsyncReader(Reader):
         self._wait_for_buffer_and_remove_complete_futures(size)
         ret_data = self._buffer[:size]
         del self._buffer[:size]
-        return ret_data
+        return bytes(ret_data)
 
     def for_each_chunk(self):
         while True:
